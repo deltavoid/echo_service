@@ -1,0 +1,22 @@
+[Unit]
+Description=example echo service
+Wants=network.target
+After=network-online.target
+# StartLimitBurst=3
+# StartLimitIntervalSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10s
+# ExecStartPre=-/bin/systemctl stop irqbalance-ng.service
+# ExecStartPre=/bin/mkdir -p /var/nic-qb
+# ExecStartPre=-/bin/rm -rf /var/nic-qb/nic-qb.sk
+ExecStart=/usr/local/echo_service/bin/server 8192
+# MemoryMax=100M
+# MemoryLimit=100M
+# CPUQuota=20%
+
